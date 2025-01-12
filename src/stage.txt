@@ -1,0 +1,6 @@
+1.take image from imagej and make seg with wake. 
+2. save the "get reuslts"
+3. run the code wekato yoyo-imageto txt.py
+4. the output save in dataset
+5.run the trainModel on modeltrain folder
+6. run guioredict.py get the reuslts
