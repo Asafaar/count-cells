@@ -1,2 +1,0 @@
-hct116 cells
-huvec cells
