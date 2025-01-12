@@ -97,7 +97,7 @@ python gui-predict.py
 ![Cell Analysis Example 1](https://github.com/Asafaar/Words_app_for_psychometric/blob/main/1.jpg?raw=true)
 
 ### Results Visualization
-![Cell Analysis Example 2](https://github.com/Asafaar/Words_app_for_psychometric/blob/main/2.jpg?raw=true)
+![Cell Analysis Example 2](https://github.com/Asafaar/count-cells/blob/Work/redme-pic/weka-seg.png)
 
 ## 🔮 Future Development
 
