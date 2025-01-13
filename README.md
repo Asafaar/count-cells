@@ -82,10 +82,13 @@ python gui-predict.py
 ## 📸 Visual Examples
 
 ### Cell Analysis Process
-![Cell Analysis Example 1](https://github.com/Asafaar/Words_app_for_psychometric/blob/main/1.jpg?raw=true)
+<img src="https://github.com/Asafaar/count-cells/blob/Work/README-pic/weka-seg.png" width="500" height="400">
+<img src="https://github.com/Asafaar/count-cells/blob/Work/README-pic/class%20image.png" width="500" height="400">
 
 ### Results Visualization
-![Cell Analysis Example 2](https://github.com/Asafaar/count-cells/blob/Work/redme-pic/weka-seg.png)
+
+<img src="https://github.com/Asafaar/count-cells/blob/Work/README-pic/gui.png" width="500" >
+<img src="https://github.com/Asafaar/count-cells/blob/Work/README-pic/predict-results.png" width="500" >
 
 ## 🔮 Future Development
 
