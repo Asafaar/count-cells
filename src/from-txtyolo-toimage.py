@@ -29,7 +29,7 @@ def visualize_yolo_annotations(image_path, annotations_path, class_names):
     except FileNotFoundError:
         print(f"Error: Annotations file not found at: {annotations_path}")
         return  # Exit the function if file not found
-    except Exception as e: #לכידת שגיאות אחרות
+    except Exception as e:
         print(f"An error occurred: {e}")
         return
 

@@ -1,9 +1,8 @@
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
-import cv2
+from PIL import Image, ImageDraw, ImageFont, ImageTk
 from ultralytics import YOLO
 import os
-import numpy as np
 from ttkthemes import ThemedTk
 
 def run_prediction():
@@ -20,7 +19,7 @@ def run_prediction():
         scale = float(scale)
         flask_size = float(flask_size)
     except ValueError:
-        messagebox.showerror("Error", "Invalid scale or flask size. Please select from the dropdown.")
+        messagebox.showerror("Error", "Invalid scale or flask size.")
         return
 
     if not os.path.exists(image_path):
@@ -38,13 +37,23 @@ def run_prediction():
 
         im_array = results[0].plot()
 
-        cv2.putText(im_array, f"Cells: {num_cells}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+        img = Image.fromarray(im_array)
+        draw = ImageDraw.Draw(img)
+
+        try:
+            font = ImageFont.truetype("arial.ttf", 20)
+        except IOError:
+            font = ImageFont.load_default()
+
+        draw.text((10, 10), f"Cells: {num_cells}", font=font, fill=(0, 255, 0))
+
         total_cells_in_flask = num_cells * (flask_size / scale)
         result_label.config(text=f"Cells in image: {num_cells}\nEstimated cells in flask: {int(total_cells_in_flask)}")
 
-        cv2.imshow('Prediction', im_array)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+
+        img = ImageTk.PhotoImage(img) 
+        image_panel.config(image=img)
+        image_panel.image = img 
 
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred: {e}")
@@ -59,7 +68,7 @@ def browse_model():
     model_entry.delete(0, tk.END)
     model_entry.insert(0, filename)
 
-window = ThemedTk(theme="arc")  # שימוש בערכת נושא "arc". נסה גם "clam", "radiance" וכו'.
+window = ThemedTk(theme="arc")
 window.title("YOLO Cell Counter")
 
 style = ttk.Style(window)
@@ -89,7 +98,7 @@ model_button.grid(row=1, column=2, padx=5, pady=5)
 scale_label = ttk.Label(window, text="Image Scale (e.g., area in mm^2):")
 scale_label.grid(row=2, column=0, padx=5, pady=5)
 
-scale_options = [1, 4, 10, 25, 100]  # דוגמאות לקני מידה
+scale_options = [1, 4, 10, 25, 100]
 scale_combobox = ttk.Combobox(window, values=scale_options)
 scale_combobox.grid(row=2, column=1, padx=5, pady=5)
 scale_combobox.current(0)
@@ -97,7 +106,7 @@ scale_combobox.current(0)
 flask_size_label = ttk.Label(window, text="Flask Size (e.g., area in mm^2):")
 flask_size_label.grid(row=3, column=0, padx=5, pady=5)
 
-flask_size_options = [25, 75, 175, 225, 600]  # דוגמאות לגדלי פלאסק
+flask_size_options = [25, 75, 175, 225, 600]
 flask_size_combobox = ttk.Combobox(window, values=flask_size_options)
 flask_size_combobox.grid(row=3, column=1, padx=5, pady=5)
 flask_size_combobox.current(0)
@@ -107,5 +116,9 @@ run_button.grid(row=4, column=1, padx=5, pady=10)
 
 result_label = ttk.Label(window, text="")
 result_label.grid(row=5, column=1, padx=5, pady=5)
+
+# הוספת פאנל לתמונה
+image_panel = ttk.Label(window)
+image_panel.grid(row=6, column=0, columnspan=3, padx=5, pady=5) # משתרע על כל העמודות
 
 window.mainloop()

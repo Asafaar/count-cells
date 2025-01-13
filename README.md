@@ -31,19 +31,7 @@ Our breakthrough achievement lies in developing a neural network model that achi
 
 ### 👥 For Users
 
-The application consists of two components that need to be started separately:
-
-1. Start the server:
-```bash
-cd server
-npm start
-```
-
-2. Start the client:
-```bash
-cd my-app
-npm start
-```
+run the executable file in the dist folder
 
 ### 👨‍💻 For Developers
 
